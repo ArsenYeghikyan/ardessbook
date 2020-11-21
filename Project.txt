@@ -1,0 +1,109 @@
+Create an AddressBook program, the entries of the AddressBook is (LastName, FirstName, birthDate, phoneNumber, city, street)
+
+When the AddressBook program is run, the following menu should be shown:
+
+======ADDRESS BOOK MENU======
+Choose one of the following options and press ENTER
+1. Print all entries
+2. Add new entry
+3. Delete an entry
+4. Update an entry
+5. Search entry by phone number
+6. Exit
+
+
+If the first option is chosen (Print all entries), all entries in the address book should be printed on the console and after that the address book's menu should be shown
+For example:
+
+======ALL ENTRIES======
+1. Poghosyan Garnik 1990 9132422 Yerevan Vagharshyan
+2. Kreyan Samvel 1989 4636364 Vanadzor Qochar
+=======================
+
+======ADDRESS BOOK MENU======
+Choose one of the following options and press ENTER
+1. Print all entries
+2. Add new entry
+3. Delete an entry
+4. Update an entry
+5. Search entry by phone number
+6. Exit
+
+
+If the second option is chosen (Add new entry), the following messages should be shown (each new message should be shown after entering requested information and hitting enter)
+Please enter the LastName: Avagyan
+Please enter the FirstName: Karen
+Please enter the phoneNumber: 7963979
+Please enter the city: Abovyan
+Please enter the street: Myasnikyan
+
+After entering all the requested data and hitting the enter, if the new entry was successfully added in the address book, the following message should be shown:
+
+======THE RECORD WAS ADDED======
+
+or
+
+======FAILED TO CREATE A RECORD====== 
+
+if the entry wasn't added. After this message the address book's menu should be shown
+
+
+======ADDRESS BOOK MENU======
+Choose one of the following options and press ENTER
+1. Print all entries
+2. Add new entry
+3. Delete an entry
+4. Update an entry
+5. Search entry by phone number
+6. Exit
+
+
+If the third option is chosen, the following message should be shown:
+
+Please enter the ID: 
+
+after entering the ID the corresponding entry should be removed from the address book and following message should be shown:
+
+======The ENTRY WITH ID {ID} WAS REMOVED======
+
+or if no such id exists in the address book:
+
+======INVALID ID {ID} PROVIDED======
+
+After this message the menu should be shown:
+
+======ADDRESS BOOK MENU======
+Choose one of the following options and press ENTER
+1. Print all entries
+2. Add new entry
+3. Delete an entry
+4. Update an entry
+5. Search entry by phone number
+6. Exit
+
+
+If the fifth entry is chosen, the following message should be shown:
+
+Please enter the phone number: 7963979
+
+After entering the phone number to search for and hitting enter, the corresponding entry should be shown on the console
+
+======THE ENTRY FOUND======
+3. Avagyan Karen 7963979 Abovyan Myasnikyan
+
+or 
+
+======NO ENTRY FOUND FOR 7963979======
+
+And after the menu.
+
+======ADDRESS BOOK MENU======
+Choose one of the following options and press ENTER
+1. Print all entries
+2. Add new entry
+3. Delete an entry
+4. Update an entry
+5. Search entry by phone number
+6. Exit
+
+If the sixth menu is chosen the program stops its execution.
