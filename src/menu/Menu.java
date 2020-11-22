@@ -10,7 +10,7 @@ public class Menu implements Menu_Interface {
 
     Scanner scanner = new Scanner(System.in);
     //popoxakan contactCount avelacnuma Id @st avelacrac contaktneri
-  public static int contactCount = 0;
+    public static int contactCount = 0;
     Map<Integer, Contact> contactMap = new HashMap<>();
 
     public void showMenuDisplay() {
@@ -34,6 +34,7 @@ public class Menu implements Menu_Interface {
                 case 2 -> addContact();
                 case 3 -> deleteContact();
                 case 4 -> updateContact();
+                case 5 -> searchContactByPhoneNumber();
                 case 6 -> {
                     System.out.println("Exit");
                     isActiveMenu = false;
@@ -55,21 +56,9 @@ public class Menu implements Menu_Interface {
         if (contactMap.isEmpty()) {
             System.out.println("\n=========Contact list is empty========\n");
         } else {
-            for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
-
-                System.out.println(
-
-                        "\nID contact:" + contact.getValue().getId() +
-                                "\nName: " + contact.getValue().getName() +
-                                "\nLast name: " + contact.getValue().getLastName() +
-                                "\nPhone number: " + contact.getValue().getPhoneNumber() + '\n'
-
-                );
-            }
-
+                printContactInfo();
 
         }
-
         System.out.println("\n======================\n");
     }
 
@@ -80,64 +69,124 @@ public class Menu implements Menu_Interface {
         System.out.println("======THE RECORD WAS ADDED======");
     }
 
+
     @Override
-   public void deleteContact(){
+    public void deleteContact() {
         System.out.println("======Enter id for delete======");
 
-        int idForDelete=scanner.nextInt();
+        int idForDelete = scanner.nextInt();
 
         for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
-            if (contact.getValue().getId()==idForDelete) {
+            if (contact.getValue().getId() == idForDelete) {
+//!!!!!!!!!!!!!!!!!!!!!!
 
 
-
-                contactMap.remove(contact);
-                System.out.println("======The ENTRY WITH ID {"+idForDelete+"} WAS REMOVED======");
-            }else {
-                System.out.println("======INVALID ID {"+idForDelete+"} PROVIDED======");
+                System.out.println("======The ENTRY WITH ID {" + idForDelete + "} WAS REMOVED======");
+            } else {
+                System.out.println("======INVALID ID {" + idForDelete + "} PROVIDED======");
             }
-
         }
-    };
+        contactMap.remove(idForDelete);
+    }
+
 
     @Override
     public void updateContact() {
         System.out.println("======Enter id for update======");
 
-        int idForReplace=scanner.nextInt();
+        int idForReplace = scanner.nextInt();
 
         for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
-            if (contact.getValue().getId()==idForReplace) {
+            if (contact.getValue().getId() == idForReplace) {
 
                 Contact contact2 = createContact();
+                contactMap.replace(idForReplace,contact2);
 
-                contact.setValue(new Contact(contact2.getName(), contact2.getLastName(), contact.getValue().getId(), contact2.getPhoneNumber()));
+                contact.setValue(
+                        new Contact(
+                                contact2.getName(),
+                                contact2.getLastName(),
+                                contact.getValue().getId(),
+                                contact2.getPhoneNumber(),
+                                contact2.getBirthDate(),
+                                contact2.getCity(),
+                                contact2.getStreet()));
 
-            }else {
+            } else {
                 System.out.println("not fine this ID");
             }
 
         }
     }
 
+
     @Override
-    public Contact searchContactByPhoneNumber(int phoneNumber) {
-        return null;
+    public void searchContactByPhoneNumber() {
+        System.out.println("======Enter phone number for search contact======");
+
+        int phone = scanner.nextInt();
+
+        for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
+            if (contact.getValue().getPhoneNumber() == phone) {
+                System.out.println("\n======THE CONTACT FOUND======\n");
+                printContactInfo();
+
+            } else {
+                System.out.println("not find " + phone);
+            }
+
+        }
     }
 
 
     private Contact createContact() {
         System.out.println("Input name: ");
         String contactName = scanner.next();
+
         System.out.println("Input last name: ");
         String contactLastName = scanner.next();
+
         System.out.println("Input phone number: ");
         int phoneNumber = scanner.nextInt();
+
+        System.out.println("Input birth date: ");
+        int contactBirthDate = scanner.nextInt();
+
+        if (phoneNumber <= 0 || contactBirthDate <= 1860) {
+            System.out.println("\n======FAILED TO CREATE A RECORD======\n" +
+                    "======Incorrect phone number format or birth date format, try again======\n");
+
+            showMenuDisplay();
+        }
+
+        System.out.println("Input city: ");
+        String contactCity = scanner.next();
+
+        System.out.println("Input street: ");
+        String contactStreet = scanner.next();
         contactCount++;
-        return new Contact(contactName, contactLastName, contactCount, phoneNumber);
+
+
+        return new Contact(contactName, contactLastName, contactCount, phoneNumber, contactBirthDate, contactCity, contactStreet);
 
     }
 
+    private void printContactInfo() {
+        for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
 
+            System.out.println(
+                    "\nID contact:" + contact.getValue().getId() +
+                    "\nName: " + contact.getValue().getName() +
+                    "\nLast name: " + contact.getValue().getLastName() +
+                    "\nPhone number: " + contact.getValue().getPhoneNumber() + '\n' +
+                    "\nBirth date: " + contact.getValue().getBirthDate() + '\n' +
+                    "\nCity: " + contact.getValue().getCity() + '\n' +
+                    "\nstreet: " + contact.getValue().getStreet() + '\n');
+
+
+        }
+
+
+    }
 
 }

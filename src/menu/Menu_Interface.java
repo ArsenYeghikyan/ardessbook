@@ -8,7 +8,7 @@ public interface Menu_Interface {
    void addContact();
    void deleteContact();
    void updateContact();
-   Contact searchContactByPhoneNumber(int phoneNumber);
+   void searchContactByPhoneNumber();
 
 
 }

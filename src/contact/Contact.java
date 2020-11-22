@@ -6,28 +6,25 @@ public class Contact extends Human {
     private int id;
     private int phoneNumber;
 
-    public Contact(String name, String lastName, int phoneNumber) {
-        super(name, lastName);
-
-        if (phoneNumber<=0){
-            System.out.println("Incorrect phone number please use international format");
-        }else {
-            this.phoneNumber = phoneNumber;
-        }
+    public Contact(String name, String lastName,int id, int phoneNumber,int birthDate, String city, String street ) {
+        super(name, lastName, birthDate, city, street);
 
 
+        this.id = id;
+        this.phoneNumber = phoneNumber;
     }
-    public Contact(String name, String lastName, int id, int phoneNumber) {
-        super(name, lastName);
-        this.id=id;
-        if (phoneNumber<=0){
-            System.out.println("Incorrect phone number please use international format");
-        }else {
-            this.phoneNumber = phoneNumber;
-        }
 
+    public Contact(String name, String lastName, int phoneNumber,int birthDate, String city, String street) {
+        super(name, lastName, birthDate, city, street);
 
+        this.phoneNumber = phoneNumber;
     }
+
+
+
+
+
+
 
 
     public int getId() {

@@ -1,3 +1,5 @@
+package startmenu;
+
 import menu.Menu;
 
 public class Main {
