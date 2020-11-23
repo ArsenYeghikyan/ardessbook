@@ -9,8 +9,7 @@ import java.util.Scanner;
 public class Menu implements Menu_Interface {
 
     Scanner scanner = new Scanner(System.in);
-    //popoxakan contactCount avelacnuma Id @st avelacrac contaktneri
-    public static int contactCount = 0;
+    static private int id = 1;
     Map<Integer, Contact> contactMap = new HashMap<>();
 
     public void showMenuDisplay() {
@@ -28,18 +27,34 @@ public class Menu implements Menu_Interface {
             System.out.println("Drop down select the command by clicking the button from 1 to 6");
             int button = scanner.nextInt();
 
-/// ogtagorcel em nor Switch case@
+
             switch (button) {
-                case 1 -> printAllContacts();
-                case 2 -> addContact();
-                case 3 -> deleteContact();
-                case 4 -> updateContact();
-                case 5 -> searchContactByPhoneNumber();
-                case 6 -> {
+                case 1: {
+                    printAllContacts();
+                    break;
+                }
+                case 2: {
+                    addContact();
+                    break;
+                }
+                case 3: {
+                    deleteContact();
+                    break;
+                }
+                case 4: {
+                    updateContact();
+                    break;
+                }
+                case 5: {
+                    searchContactByPhoneNumber();
+                    break;
+                }
+                case 6: {
                     System.out.println("Exit");
                     isActiveMenu = false;
+                    break;
                 }
-                default -> {
+                default: {
                     System.out.println("error!");
                     isActiveMenu = false;
                 }
@@ -51,7 +66,7 @@ public class Menu implements Menu_Interface {
 
     @Override
     public void printAllContacts() {
-        System.out.println("\n======ALL ENTRIES======\n");
+        System.out.println("\n======ALL CONTACTS======\n");
 
         if (contactMap.isEmpty()) {
             System.out.println("\n=========Contact list is empty========\n");
@@ -65,21 +80,23 @@ public class Menu implements Menu_Interface {
     @Override
     public void addContact() {
 
-        contactMap.put(contactCount, createContact());
+        Contact contactForAdd = createContact();
+
+        contactMap.put(id++, contactForAdd);
+
         System.out.println("======THE RECORD WAS ADDED======");
+
     }
 
 
     @Override
     public void deleteContact() {
-        System.out.println("======Enter id for delete======");
+        System.out.println("======Enter ID for delete======");
 
         int idForDelete = scanner.nextInt();
 
         for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
-            if (contact.getValue().getId() == idForDelete) {
-//!!!!!!!!!!!!!!!!!!!!!!
-
+            if (contact.getKey() == idForDelete) {
 
                 System.out.println("======The ENTRY WITH ID {" + idForDelete + "} WAS REMOVED======");
             } else {
@@ -87,33 +104,28 @@ public class Menu implements Menu_Interface {
             }
         }
         contactMap.remove(idForDelete);
+        if (contactMap.isEmpty()) {
+            id = 1;
+        }
     }
 
 
     @Override
     public void updateContact() {
-        System.out.println("======Enter id for update======");
+        System.out.println("======Enter ID for update contact ======");
 
         int idForReplace = scanner.nextInt();
 
         for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
-            if (contact.getValue().getId() == idForReplace) {
+            if (contact.getKey() == idForReplace) {
 
-                Contact contact2 = createContact();
-                contactMap.replace(idForReplace,contact2);
+                Contact contactForUpdate = createContact();
 
-                contact.setValue(
-                        new Contact(
-                                contact2.getName(),
-                                contact2.getLastName(),
-                                contact.getValue().getId(),
-                                contact2.getPhoneNumber(),
-                                contact2.getBirthDate(),
-                                contact2.getCity(),
-                                contact2.getStreet()));
+                contact.setValue(contactForUpdate);
+
 
             } else {
-                System.out.println("not fine this ID");
+                System.out.println("NOT FIND ID:  " + idForReplace);
             }
 
         }
@@ -122,7 +134,7 @@ public class Menu implements Menu_Interface {
 
     @Override
     public void searchContactByPhoneNumber() {
-        System.out.println("======Enter phone number for search contact======");
+        System.out.println("====== Enter phone number for search contact ======");
 
         int phone = scanner.nextInt();
 
@@ -132,7 +144,7 @@ public class Menu implements Menu_Interface {
                 printContactInfo();
 
             } else {
-                System.out.println("not find " + phone);
+                System.out.println("NOT FIND " + phone);
             }
 
         }
@@ -164,10 +176,9 @@ public class Menu implements Menu_Interface {
 
         System.out.println("Input street: ");
         String contactStreet = scanner.next();
-        contactCount++;
 
 
-        return new Contact(contactName, contactLastName, contactCount, phoneNumber, contactBirthDate, contactCity, contactStreet);
+        return new Contact(contactName, contactLastName, phoneNumber, contactBirthDate, contactCity, contactStreet);
 
     }
 
@@ -175,13 +186,13 @@ public class Menu implements Menu_Interface {
         for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
 
             System.out.println(
-                    "\nID contact:" + contact.getValue().getId() +
-                    "\nName: " + contact.getValue().getName() +
-                    "\nLast name: " + contact.getValue().getLastName() +
-                    "\nPhone number: " + contact.getValue().getPhoneNumber() + '\n' +
-                    "\nBirth date: " + contact.getValue().getBirthDate() + '\n' +
-                    "\nCity: " + contact.getValue().getCity() + '\n' +
-                    "\nstreet: " + contact.getValue().getStreet() + '\n');
+                            "\nID contact:" + contact.getKey() +
+                            "\nName: " + contact.getValue().getName() +
+                            "\nLast name: " + contact.getValue().getLastName() +
+                            "\nPhone number: " + contact.getValue().getPhoneNumber() +
+                            "\nBirth date: " + contact.getValue().getBirthDate() +
+                            "\nCity: " + contact.getValue().getCity() +
+                            "\nstreet: " + contact.getValue().getStreet());
 
 
         }
