@@ -2,6 +2,14 @@ package menu;
 
 import contact.Contact;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -185,19 +193,43 @@ public class Menu implements Menu_Interface {
     private void printContactInfo() {
         for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
 
-            System.out.println(
-                            "\nID contact:" + contact.getKey() +
-                            "\nName: " + contact.getValue().getName() +
-                            "\nLast name: " + contact.getValue().getLastName() +
-                            "\nPhone number: " + contact.getValue().getPhoneNumber() +
-                            "\nBirth date: " + contact.getValue().getBirthDate() +
-                            "\nCity: " + contact.getValue().getCity() +
-                            "\nstreet: " + contact.getValue().getStreet());
+           System.out.println(
+                           "\nID contact:" + contact.getKey() +
+                           "\nName: " + contact.getValue().getName() +
+                           "\nLast name: " + contact.getValue().getLastName() +
+                           "\nPhone number: " + contact.getValue().getPhoneNumber() +
+                           "\nBirth date: " + contact.getValue().getBirthDate() +
+                           "\nCity: " + contact.getValue().getCity() +
+                           "\nstreet: " + contact.getValue().getStreet());
 
 
-        }
 
+
+     }
 
     }
 
 }
+//    Path filePath = Paths.get("MyFileName.txt");
+//            try (BufferedWriter bufferedWriter = Files.newBufferedWriter(filePath, Charset.defaultCharset(),
+//                    StandardOpenOption.CREATE)) {
+//                    PrintWriter printWriter = new PrintWriter(bufferedWriter);
+//                    printWriter.print("\nID contact:" + contact.getKey() +
+//                    "\nName: " + contact.getValue().getName() +
+//                    "\nLast name: " + contact.getValue().getLastName() +
+//                    "\nPhone number: " + contact.getValue().getPhoneNumber() +
+//                    "\nBirth date: " + contact.getValue().getBirthDate() +
+//                    "\nCity: " + contact.getValue().getCity() +
+//                    "\nstreet: " + contact.getValue().getStreet());
+//
+//                    } catch (IOException e) {
+//                    // print some message
+//                    }
+//            How to read from a file
+//            try (Scanner scanner = new Scanner(new File("MyFileName.txt"))) {
+//                while(scanner.hasNext()) {
+//                    System.out.println(scanner.next());
+//                }
+//            } catch (FileNotFoundException e) {
+//                // print some message
+//            }

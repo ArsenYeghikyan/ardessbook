@@ -2,7 +2,7 @@ package menu;
 
 import contact.Contact;
 
-public interface Menu_Interface {
+ interface Menu_Interface {
    void showMenuDisplay();
    void printAllContacts();
    void addContact();
