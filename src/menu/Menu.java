@@ -2,9 +2,7 @@ package menu;
 
 import contact.Contact;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -86,7 +84,13 @@ public class Menu implements Menu_Interface {
             System.out.println("\n=========Contact list is empty========\n");
         } else {
             printContactInfo();
-
+            try (Scanner scanner = new Scanner(new File("addressBook.txt"))) {
+                while(scanner.hasNext()) {
+                    System.out.println(scanner.nextLine());
+                }
+            } catch (FileNotFoundException e) {
+                // print some message
+            }
         }
         System.out.println("\n======================\n");
     }
@@ -215,7 +219,7 @@ public class Menu implements Menu_Interface {
     }
 
 
-    private void printInFile(Contact contactForPrintinFile) {
+    private void printInFile(Contact contactForPrintInFile) {
 
 
         Path filePath = Paths.get("addressBook.txt");
@@ -223,25 +227,22 @@ public class Menu implements Menu_Interface {
                 StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
             PrintWriter printWriter = new PrintWriter(bufferedWriter, true);
             printWriter.println("\nID contact:" + id +
-                    "\nName: " + contactForPrintinFile.getName() +
-                    "\nLast name: " + contactForPrintinFile.getLastName() +
-                    "\nPhone number: " + contactForPrintinFile.getPhoneNumber() +
-                    "\nBirth date: " + contactForPrintinFile.getBirthDate() +
-                    "\nCity: " + contactForPrintinFile.getCity() +
-                    "\nstreet: " + contactForPrintinFile.getStreet());
+                    "\nName: " + contactForPrintInFile.getName() +
+                    "\nLast name: " + contactForPrintInFile.getLastName() +
+                    "\nPhone number: " + contactForPrintInFile.getPhoneNumber() +
+                    "\nBirth date: " + contactForPrintInFile.getBirthDate() +
+                    "\nCity: " + contactForPrintInFile.getCity() +
+                    "\nstreet: " + contactForPrintInFile.getStreet());
 
         } catch (IOException e) {
             // print some message
         }
-//        }
+
     }
+//    public boolean isFileEmpty(File file) {
+//        BufferedReader br = new BufferedReader(new BufferedReader());
+//        return br.lines() == null;
+//    }
 }
 
-//            How to read from a file
-//            try (Scanner scanner = new Scanner(new File("addressBook.txt"))) {
-//                while(scanner.hasNext()) {
-//                    System.out.println(scanner.next());
-//                }
-//            } catch (FileNotFoundException e) {
-//                // print some message
-//            }
+
