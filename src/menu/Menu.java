@@ -20,6 +20,12 @@ public class Menu implements Menu_Interface {
     static private int id = 1;
     Map<Integer, Contact> contactMap = new HashMap<>();
 
+    public Menu() {
+        showMenuDisplay();
+
+    }
+
+    @Override
     public void showMenuDisplay() {
         boolean isActiveMenu = true;
         do {
@@ -79,7 +85,7 @@ public class Menu implements Menu_Interface {
         if (contactMap.isEmpty()) {
             System.out.println("\n=========Contact list is empty========\n");
         } else {
-                printContactInfo();
+            printContactInfo();
 
         }
         System.out.println("\n======================\n");
@@ -113,6 +119,7 @@ public class Menu implements Menu_Interface {
         }
         contactMap.remove(idForDelete);
         if (contactMap.isEmpty()) {
+            System.out.println("===ADDRESS BOOK IS EMPTY===");
             id = 1;
         }
     }
@@ -184,49 +191,54 @@ public class Menu implements Menu_Interface {
 
         System.out.println("Input street: ");
         String contactStreet = scanner.next();
-
-
-        return new Contact(contactName, contactLastName, phoneNumber, contactBirthDate, contactCity, contactStreet);
+        Contact contact = new Contact(contactName, contactLastName, phoneNumber, contactBirthDate, contactCity, contactStreet);
+        printInFile(contact);
+        return contact;
 
     }
 
     private void printContactInfo() {
         for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
 
-           System.out.println(
-                           "\nID contact:" + contact.getKey() +
-                           "\nName: " + contact.getValue().getName() +
-                           "\nLast name: " + contact.getValue().getLastName() +
-                           "\nPhone number: " + contact.getValue().getPhoneNumber() +
-                           "\nBirth date: " + contact.getValue().getBirthDate() +
-                           "\nCity: " + contact.getValue().getCity() +
-                           "\nstreet: " + contact.getValue().getStreet());
+            System.out.println(
+                    "\nID contact:" + contact.getKey() +
+                            "\nName: " + contact.getValue().getName() +
+                            "\nLast name: " + contact.getValue().getLastName() +
+                            "\nPhone number: " + contact.getValue().getPhoneNumber() +
+                            "\nBirth date: " + contact.getValue().getBirthDate() +
+                            "\nCity: " + contact.getValue().getCity() +
+                            "\nstreet: " + contact.getValue().getStreet());
 
 
-
-
-     }
+        }
 
     }
 
+
+    private void printInFile(Contact contactForPrintinFile) {
+
+
+        Path filePath = Paths.get("addressBook.txt");
+        try (BufferedWriter bufferedWriter = Files.newBufferedWriter(filePath, Charset.defaultCharset(),
+                StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+            PrintWriter printWriter = new PrintWriter(bufferedWriter, true);
+            printWriter.println("\nID contact:" + id +
+                    "\nName: " + contactForPrintinFile.getName() +
+                    "\nLast name: " + contactForPrintinFile.getLastName() +
+                    "\nPhone number: " + contactForPrintinFile.getPhoneNumber() +
+                    "\nBirth date: " + contactForPrintinFile.getBirthDate() +
+                    "\nCity: " + contactForPrintinFile.getCity() +
+                    "\nstreet: " + contactForPrintinFile.getStreet());
+
+        } catch (IOException e) {
+            // print some message
+        }
+//        }
+    }
 }
-//    Path filePath = Paths.get("MyFileName.txt");
-//            try (BufferedWriter bufferedWriter = Files.newBufferedWriter(filePath, Charset.defaultCharset(),
-//                    StandardOpenOption.CREATE)) {
-//                    PrintWriter printWriter = new PrintWriter(bufferedWriter);
-//                    printWriter.print("\nID contact:" + contact.getKey() +
-//                    "\nName: " + contact.getValue().getName() +
-//                    "\nLast name: " + contact.getValue().getLastName() +
-//                    "\nPhone number: " + contact.getValue().getPhoneNumber() +
-//                    "\nBirth date: " + contact.getValue().getBirthDate() +
-//                    "\nCity: " + contact.getValue().getCity() +
-//                    "\nstreet: " + contact.getValue().getStreet());
-//
-//                    } catch (IOException e) {
-//                    // print some message
-//                    }
+
 //            How to read from a file
-//            try (Scanner scanner = new Scanner(new File("MyFileName.txt"))) {
+//            try (Scanner scanner = new Scanner(new File("addressBook.txt"))) {
 //                while(scanner.hasNext()) {
 //                    System.out.println(scanner.next());
 //                }

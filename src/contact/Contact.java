@@ -9,8 +9,12 @@ public class Contact extends Human {
 
     public Contact(String name, String lastName, int phoneNumber,int birthDate, String city, String street) {
         super(name, lastName, birthDate, city, street);
+        if (phoneNumber<=0){
+            System.out.println("Incorrect phone number please use international format");
+        }else {
+            this.phoneNumber = phoneNumber;
+        }
 
-        this.phoneNumber = phoneNumber;
     }
 
 
