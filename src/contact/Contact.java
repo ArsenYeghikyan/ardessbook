@@ -1,5 +1,6 @@
 package contact;
 
+
 import java.util.Objects;
 
 public class Contact extends Human {
@@ -7,16 +8,19 @@ public class Contact extends Human {
     private int phoneNumber;
 
 
-    public Contact(String name, String lastName, int phoneNumber,int birthDate, String city, String street) {
+    public Contact(String name, String lastName, int phoneNumber, int birthDate, String city, String street) {
+
         super(name, lastName, birthDate, city, street);
-        if (phoneNumber<=0){
-            System.out.println("Incorrect phone number please use international format");
-        }else {
-            this.phoneNumber = phoneNumber;
-        }
+
+            if (phoneNumber <= 0) {
+                System.out.println("Invalid phone number");
+            } else {
+                this.phoneNumber = phoneNumber;
+
+            }
+
 
     }
-
 
 
     public int getPhoneNumber() {

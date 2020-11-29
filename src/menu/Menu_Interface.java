@@ -1,14 +1,14 @@
 package menu;
 
-import contact.Contact;
+
 
  interface Menu_Interface {
-   void showMenuDisplay();
-   void printAllContacts();
-   void addContact();
+   void showMenuDisplay() throws Exception;
+   void printAllContacts() throws Exception;
+   void addContact() throws Exception;
    void deleteContact();
-   void updateContact();
-   void searchContactByPhoneNumber();
+   void updateContact() throws Exception;
+   void searchContactByPhoneNumber() throws Exception;
 
 
 }

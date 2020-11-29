@@ -1,5 +1,6 @@
 package contact;
 
+
 import java.util.Objects;
 
 public abstract class Human {
@@ -9,14 +10,17 @@ public abstract class Human {
     private String city;
     private String street;
 
-    public Human(String name, String lastName, int birthDate, String city, String street) {
+
+    public Human (String name, String lastName, int birthDate, String city, String street)  {
         this.name = name;
         this.lastName = lastName;
 
-        if (birthDate<=1860){
-            System.out.println("Incorrect birth date please use international format");
-        }else {
+        if (birthDate <= 1860) {
+
+            System.out.println("======Incorrect  birthDate , try again======\n");
+        } else {
             this.birthDate = birthDate;
+
         }
         this.city = city;
         this.street = street;
