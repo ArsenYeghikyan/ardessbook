@@ -4,24 +4,13 @@ package contact;
 import java.util.Objects;
 
 public class Contact extends Human {
-
     private int phoneNumber;
 
+    public Contact() {
+        System.out.println("Input phone number: ");
 
-    public Contact(String name, String lastName, int phoneNumber, int birthDate, String city, String street) {
-
-        super(name, lastName, birthDate, city, street);
-
-            if (phoneNumber <= 0) {
-                System.out.println("Invalid phone number");
-            } else {
-                this.phoneNumber = phoneNumber;
-
-            }
-
-
+        this.phoneNumber = scanner.nextInt();
     }
-
 
     public int getPhoneNumber() {
         return phoneNumber;
@@ -40,5 +29,6 @@ public class Contact extends Human {
     public int hashCode() {
         return Objects.hash(super.hashCode(), getPhoneNumber());
     }
+
 
 }

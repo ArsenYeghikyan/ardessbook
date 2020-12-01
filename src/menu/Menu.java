@@ -32,7 +32,6 @@ public class Menu implements Menu_Interface {
                 System.out.println("Drop down select the command by clicking the button from 1 to 6");
                 int button = scanner.nextInt();
 
-
                 switch (button) {
                     case 1: {
                         printAllContacts();
@@ -81,12 +80,9 @@ public class Menu implements Menu_Interface {
     }
 
     @Override
-    public void addContact()  {
+    public void addContact() {
 
-        Contact contactForAdd = createContact();
-
-        contactMap.put(id++, contactForAdd);
-
+        contactMap.put(id++, new Contact());
         System.out.println("======THE RECORD WAS ADDED======");
 
     }
@@ -119,7 +115,7 @@ public class Menu implements Menu_Interface {
         int idForReplace = scanner.nextInt();
 
         if (contactMap.get(idForReplace) != null) {
-            Contact contactForUpdate = createContact();
+            Contact contactForUpdate = new Contact();
             contactMap.replace(idForReplace, contactForUpdate);
 
             System.out.println("======The CONTACT WITH ID {" + idForReplace + "} WAS UPDATED======");
@@ -133,51 +129,15 @@ public class Menu implements Menu_Interface {
 
 
     @Override
-    public void searchContactByPhoneNumber()  {
+    public void searchContactByPhoneNumber() {
         System.out.println("====== Enter phone number for search contact ======");
 
-        int phone = scanner.nextInt();
+        int phoneNumberForSearch = scanner.nextInt();
 
         for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
-            if (contact.getValue().getPhoneNumber() == phone) {
+            if (contact.getValue().getPhoneNumber() == phoneNumberForSearch) {
+
                 System.out.println("\n======THE CONTACT FOUND======\n");
-                printContactInfo();
-
-            } else {
-                System.out.println("NOT FIND " + phone);
-            }
-
-        }
-    }
-
-
-    private Contact createContact()  {
-        System.out.println("Input name: ");
-        String contactName = scanner.next();
-
-        System.out.println("Input last name: ");
-        String contactLastName = scanner.next();
-
-        System.out.println("Input phone number: ");
-        int phoneNumber = scanner.nextInt();
-
-        System.out.println("Input birth date: ");
-        int contactBirthDate = scanner.nextInt();
-
-        System.out.println("Input city: ");
-        String contactCity = scanner.next();
-
-        System.out.println("Input street: ");
-        String contactStreet = scanner.next();
-
-
-        return new Contact(contactName, contactLastName, phoneNumber, contactBirthDate, contactCity, contactStreet);
-
-    }
-
-    private void printContactInfo()  {
-        for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
-
                 System.out.println(
                         "\nID contact:" + contact.getKey() +
                                 "\nName: " + contact.getValue().getName() +
@@ -186,13 +146,31 @@ public class Menu implements Menu_Interface {
                                 "\nBirth date: " + contact.getValue().getBirthDate() +
                                 "\nCity: " + contact.getValue().getCity() +
                                 "\nstreet: " + contact.getValue().getStreet());
-            }
 
+            } else {
+                System.out.println("NOT FIND " + phoneNumberForSearch);
+            }
 
         }
 
 
+    }
 
+
+    private void printContactInfo() {
+        for (Map.Entry<Integer, Contact> contact : contactMap.entrySet()) {
+
+            System.out.println(
+                    "\nID contact:" + contact.getKey() +
+                            "\nName: " + contact.getValue().getName() +
+                            "\nLast name: " + contact.getValue().getLastName() +
+                            "\nPhone number: " + contact.getValue().getPhoneNumber() +
+                            "\nBirth date: " + contact.getValue().getBirthDate() +
+                            "\nCity: " + contact.getValue().getCity() +
+                            "\nstreet: " + contact.getValue().getStreet());
+        }
+
+        }
 
 }
 

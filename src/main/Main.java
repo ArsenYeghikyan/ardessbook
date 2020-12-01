@@ -1,4 +1,4 @@
-package startmenu;
+package main;
 
 import menu.Menu;
 

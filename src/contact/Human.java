@@ -1,7 +1,7 @@
 package contact;
 
-
 import java.util.Objects;
+import java.util.Scanner;
 
 public abstract class Human {
     private String name;
@@ -9,22 +9,26 @@ public abstract class Human {
     private int birthDate;
     private String city;
     private String street;
+    Scanner scanner = new Scanner(System.in);
 
 
-    public Human (String name, String lastName, int birthDate, String city, String street)  {
-        this.name = name;
-        this.lastName = lastName;
+    public Human() {
+        System.out.println("Input name: ");
+        this.name = scanner.next();
 
-        if (birthDate <= 1860) {
+        System.out.println("Input last name: ");
+        this.lastName = scanner.next();
 
-            System.out.println("======Incorrect  birthDate , try again======\n");
-        } else {
-            this.birthDate = birthDate;
+        System.out.println("Input birth date: ");
+        this.birthDate = scanner.nextInt();
 
-        }
-        this.city = city;
-        this.street = street;
+        System.out.println("Input city: ");
+        this.city = scanner.next();
+
+        System.out.println("Input street: ");
+        this.street = scanner.next();
     }
+
 
     public String getName() {
         return name;
